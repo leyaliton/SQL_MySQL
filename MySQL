@@ -1,0 +1,101 @@
+/*CIDADE_VAGAS*/
+create table cidade_vagas (
+ id_cid integer(10) not null,
+ cidade varchar(50) not null,
+ uf char(2)
+);
+
+alter table cidade_vagas add constraint pk_cidade_vagas primary key (id_cid);
+
+/*ENDERECO_CAND*/
+create table endereco_cand (
+ id_end integer(10) not null,
+ rua varchar(100),
+ numero integer(10),
+ complemento varchar(100),
+ cep integer(8),
+ cidade varchar(100),
+ estado char(2)
+);
+
+alter table endereco_cand add constraint pk_endereco_cand primary key (id_end);
+
+
+/*GENERO_CAND*/
+create table genero_cand (
+ id_gen integer(10) not null,
+ tipo_gen varchar(10),
+ letra_gen char(1)
+);
+
+alter table genero_cand add constraint pk_genero_cand primary key (id_gen);
+
+/*PLANO*/
+create table plano (
+ id_plano integer(10) not null,
+ nome_plano varchar(20),
+ valor decimal(10,2)
+);
+
+alter table plano add constraint pk_plano primary key (id_plano);
+
+/*TIPO_VAGA*/
+create table tipo_vaga (
+ id_tipo integer(10) not null,
+ desc_tipo varchar(10)
+);
+
+alter table tipo_vaga add constraint pk_tipo_vaga primary key (id_tipo);
+
+/*VAGAS*/
+create table vagas (
+ id_vaga integer(10) not null,
+ id_tipo integer(10) not null,
+ cargo varchar(255) not null,
+ desc_text varchar(1000),
+ nivel varchar(50),
+ cidade_vaga varchar(100),
+ uf_vaga char(2),
+ quant_vagas integer(20),
+ salario decimal(10,2)
+);
+
+alter table vagas add constraint pk_vagas primary key (id_vaga,id_tipo);
+
+
+/*CANDIDATO*/
+create table candidato (
+ id_cand integer(10) not null,
+ id_gen integer(10) not null,
+ id_end nchar varying(10) not null,
+ nome_completo varchar(255),
+ genero char(1),
+ dt_nasc date,
+ usuario varchar(100),
+ senha varchar(15),
+ email varchar(255),
+ conf_email varchar(255),
+ cpf integer(11)
+);
+
+alter table candidato add constraint pk_candidato primary key (id_cand,id_gen,id_end);
+
+/*EMPRESA*/
+create table empresa (
+ id_emp integer(10) not null,
+ id_plano integer(10) not null,
+ id_vaga integer(10) not null,
+ id_tipo integer(10) not null,
+ id_cid integer(10) not null,
+ cnpj integer(14),
+ razao_social varchar(255),
+ nome_fantasia varchar(255),
+ nome_contato varchar(255),
+ email varchar(100),
+ telefone integer(10),
+cidade varchar(100),
+ uf char(2),
+ cep varchar(8),
+ login varchar(50),
+ senha varchar(16)
+);
